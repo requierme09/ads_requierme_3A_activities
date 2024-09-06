@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use app\models\student;
+use Illuminate\Support\Facades\ruoter;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/students/create', function () {
+    $student = new student();
+    $student->first_name = 'jhon';
+    $student->last_name = 'Done';
+    $student->email = 'jhondoe@example.com';
+    $student->age = 22;
+    $student->save();
+    return 'student Created!';
 });
+
+Route::get('/student', function(){
+ $student = student::all();
+ return $students;
+
+});
+
+
+Route::get('/student', function(){
+    $student = student::where('email', 'jhondoe@example.com')->first();
+    $student->email = 'jhondoe@example.com';
+    $student->age = 23;
+    $student->save();
+    return $students;
+   
+   });
+
+   Route::get('/student/update', function() {
+    $student = student::all();
+    return $students;
+   
+   });
