@@ -1,7 +1,8 @@
 <?php
 
-use app\models\student;
-use Illuminate\Support\Facades\ruoter;
+use App\Models\student;
+use App\Models\Course;
+use Illuminate\Support\Facades\Ruoter;
 
 
 
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\ruoter;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 Route::get('/students/create', function () {
     $student = new Student();
@@ -28,14 +33,14 @@ Route::get('/students/create', function () {
     return 'Student Created!';
 });
 
-Route::get('/student', function(){
+Route::get('/student', function () {
  $student = Student::all();
  return $students;
 
 });
 
 
-Route::get('/student/update', function () {
+Route::get('/students/update', function () {
     $student = Student::where('email', 'johndoe@example.com')->first();
     $student->email = 'john.doe@newmail.com';
     $student->age = 23;  //update age as well
@@ -44,27 +49,20 @@ Route::get('/student/update', function () {
    
  });
 
-   Route::get('/student/delete', function () {
-    $student = student::where('email', 'jhondoe@newemail.com')->first();
+   Route::get('/students/delete', function () {
+    $student = Student::where('email', 'john.doe@newmail.com')->first();
     $student->delete();
     return 'Student Delete!';
 });
 
 Route::get('/course/{id}/students', function ($id) {
     $course = Course::find($id);
-    return $course->students;
+    return $course ? $course->students : 'Course not found!';
 });
 
 Route::get('/course/create', function () {
-    $course = new Course();
+    $course = new course(); // Fixed class name case
     $course->course_name = 'Introduction to Databases';
     $course->save();
     return 'Course Created!';
 });
-
-
-   Route::get('/', function () {
-    return view('welcome');
-});
-
-
