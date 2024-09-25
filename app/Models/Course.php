@@ -13,9 +13,4 @@ class Course extends Model
     use HasFactory;
 }
 
-// Route::get('/course/create', function () {
-//     $course = new Course();
-//     $course->course_name = 'Introduction to Databases';
-//     $course->save();
-//     return 'Course Created!';
-// });
+
